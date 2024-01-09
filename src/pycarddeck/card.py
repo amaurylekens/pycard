@@ -32,6 +32,24 @@ class Value(Enum):
 
 class Card:
 
+    """
+    Represents a playing card with a suit and a value. Provides methods to
+    access card properties and compare cards based on a customizable ranking
+    system defined for suits and values. The ranking can be adjusted to
+    prioritise suit over value if desired.
+
+    Attributes:
+        suit_ranking (dict): A dictionary mapping Suit enums to their ranks.
+        value_ranking (dict): A dictionary mapping Value enums to their ranks.
+        suit_ordered (bool): Flag to determine if suit is considered in
+                             ranking.
+
+    :param suit: The suit of the card.
+    :type suit: Suit
+    :param value: The value of the card.
+    :type value: Value
+    """
+
     suit_ranking = {
         Suit.CLUBS: 0, Suit.SPADES: 1, Suit.HEARTS: 2,
         Suit.DIAMONDS: 3
@@ -47,8 +65,7 @@ class Card:
     def __init__(self, suit: Suit, value: Value):
 
         """
-        :param suit: Suit - the card suit.
-        :param value: Value - the card value.
+        Initializes a new Card instance with the specified suit and value.
         """
 
         self._suit = suit
@@ -58,9 +75,10 @@ class Card:
     def value(self) -> Value:
 
         """
-        Method that returns the value.
+        Gets the value of the card.
 
-        :return: Value - value.
+        :return: The value of the card.
+        :rtype: Value
         """
 
         return self._value
@@ -69,14 +87,23 @@ class Card:
     def suit(self) -> Suit:
 
         """
-        Method that returns the suit.
+        Gets the suit of the card.
 
-        :return: Suit - suit.
+        :return: The suit of the card.
+        :rtype: Suit
         """
 
         return self._suit
 
     def _rank(self):
+
+        """
+        Private method to calculate the rank of the card based on its suit and
+        value.
+
+        :return: The rank of the card.
+        :rtype: int
+        """
 
         if self.suit_ordered:
             rank = self.suit_ranking[self._suit] * len(self.value_ranking) + \
