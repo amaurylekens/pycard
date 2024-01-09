@@ -10,7 +10,15 @@ $ pip install pycarddeck
 
 ## Usage
 
-- TODO
+`pycarddeck` can be used to use a deck of cards in a game context.
+
+```python
+from pycarddeck.deck import Deck
+
+deck = Deck()
+deck.shuffle()
+card = deck.draw()
+```
 
 ## Contributing
 
