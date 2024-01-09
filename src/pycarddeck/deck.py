@@ -10,19 +10,44 @@ from src.pycarddeck.card import Card, Suit, Value
 
 
 class Deck:
+
+    """
+    Represents a deck of playing cards. Allows initialisation with a standard
+    deck, shuffling, drawing cards, and adding cards to the deck. The deck can
+    be customized with a specific number of cards, shuffled with a seed, or
+    overridden with a custom set of cards.
+
+    :param initialise: Flag to initialise the deck with standard cards.
+    :type initialise: bool
+    :param shuffle: Flag to shuffle the deck upon initialisation.
+    :type shuffle: bool
+    :param n: Number of cards to initialise in the deck, None for full deck.
+    :type n: Optional[int]
+    :param override: Custom set of cards to initialise the deck with.
+    :type override: Optional[Tuple[Card]]
+    :param seed: Seed for shuffling operations.
+    :type seed: Optional[int]
+
+    :Example:
+        >>> deck = Deck(shuffle=True)  # Create and shuffle a deck
+        >>> top_card = next(deck.draw())  # Draw the top card
+        >>> top_card
+        Card(Suit.HEARTS, Value.ACE)
+
+        >>> deck.add_card(Card(Suit.CLUBS, Value.TWO))  # Add a card to the deck
+        >>> deck.cards_count
+        51
+
+        >>> empty_deck = Deck(initialise=False)  # Create an empty deck
+        >>> empty_deck.empty
+        True
+    """
+
     def __init__(
         self, initialise: bool = True, shuffle: bool = False,
         n: Optional[int] = None, override: Optional[Tuple[Card], ...] = None,
         seed: Optional[int] = None
     ):
-
-        """
-        :param initialise:
-        :param shuffle
-        :param n:
-        :param override:
-        :param seed:
-        """
 
         self._deck: list = list()
 
@@ -36,10 +61,15 @@ class Deck:
     def empty(self) -> bool:
 
         """
-        Says if the deck is empty.
+        Checks if the deck is empty.
 
-        :return: True if the deck is empty.
+        :return: True if the deck is empty, False otherwise.
         :rtype: bool
+
+        :Example:
+            >>> deck = Deck()
+            >>> deck.empty
+            False
         """
 
         return len(self._deck) == 0
@@ -48,10 +78,15 @@ class Deck:
     def cards_count(self) -> int:
 
         """
-        Number of remaining cards in the deck.
+        Counts the number of cards remaining in the deck.
 
-        :return: Number of remaining cards in the decks.
+        :return: The number of cards in the deck.
         :rtype: int
+
+        :Example:
+            >>> deck = Deck()
+            >>> deck.cards_count
+            52
         """
 
         return len(self._deck)
@@ -62,15 +97,18 @@ class Deck:
     ) -> None:
 
         """
-        Initialize the deck. The deck can be shuffled and the number of the
-        first card to keep can be specified.
+        Initialises or reinitialises the deck. The deck can be shuffled, and a
+        specific number of cards can be selected.
 
-        :param shuffle: Bool to say if the cards have to be shuffled.
-        :type shuffle: bool
-        :param n: Number of first cards kept.
-        :type n: int
-        :param seed: Seed for shuffling operation.
-        :type seed: int
+        :param shuffle: Whether to shuffle the deck.
+        :param n: Number of cards to keep in the deck.
+        :param seed: Seed for the shuffling operation.
+
+        :Example:
+            >>> deck = Deck(initialise=False)
+            >>> deck.initialise(shuffle=True, n=20)
+            >>> deck.cards_count
+            20
         """
 
         self.clear()
@@ -88,15 +126,30 @@ class Deck:
     def clear(self) -> None:
 
         """
-        That empties the deck.
+        Empties the deck of all cards.
+
+        :Example:
+            >>> deck = Deck()
+            >>> deck.clear()
+            >>> deck.empty
+            True
         """
 
         self._deck = list()
 
-    def shuffle(self, seed: Optional[int]) -> None:
+    def shuffle(self, seed: Optional[int] = None) -> None:
 
         """
-        Shuffles the deck.
+        Shuffles the cards in the deck.
+
+        :param seed: Seed for the random shuffle.
+
+        :Example:
+            >>> deck = Deck()
+            >>> deck.shuffle(seed=42)  # Shuffles the deck with a specific seed
+            >>> top_card = next(deck.draw())
+            >>> top_card
+            Card(Suit.DIAMONDS, Value.SIX)
         """
 
         if seed:
@@ -107,12 +160,16 @@ class Deck:
     def draw(self, n: int = 1) -> Generator[Card, None, None]:
 
         """
-        Method that yields the topmost card from the deck.
+        Draws the top 'n' cards from the deck.
 
-        :param n: Number of cards to yield.
-        :type n: int
-        :return: generator - generator of cards to deal.
-        :rtype: Generator[Card, None, None]
+        :param n: Number of cards to draw.
+        :return: A generator yielding the drawn cards.
+
+        :Example:
+            >>> deck = Deck()
+            >>> cards_drawn = [card for card in deck.draw(3)]
+            >>> len(cards_drawn)
+            3
         """
 
         for i in range(n):
@@ -125,12 +182,16 @@ class Deck:
     def draw_bottom(self, n: int = 1) -> Generator[Card, None, None]:
 
         """
-        Yields the bottommost card from the deck.
+        Draws the bottom 'n' cards from the deck.
 
-        :param n: Number of cards to yield.
-        :type n: int
-        :return: generator - generator of cards to deal.
-        :rtype: Generator[Card, None, None]
+        :param n: Number of cards to draw from the bottom.
+        :return: A generator yielding the drawn cards.
+
+        :Example:
+            >>> deck = Deck()
+            >>> bottom_cards = [card for card in deck.draw_bottom(2)]
+            >>> len(bottom_cards)
+            2
         """
 
         for i in range(n):
@@ -145,14 +206,17 @@ class Deck:
     ) -> Generator[Card, None, None]:
 
         """
-        Yields the bottommost card from the deck.
+        Draws 'n' random cards from the deck.
 
-        :param n: Number of cards to yield.
-        :type n: int
+        :param n: Number of cards to draw randomly.
         :param seed: Seed for the random drawing.
-        :type seed: int
-        :return: generator - generator of cards to deal.
-        :rtype: Generator[Card, None, None]
+        :return: A generator yielding the drawn cards.
+
+        :Example:
+            >>> deck = Deck()
+            >>> random_cards = [card for card in deck.draw_random(2, seed=42)]
+            >>> len(random_cards)
+            2
         """
 
         if seed:
@@ -172,16 +236,18 @@ class Deck:
     ) -> None:
 
         """
-        Inserts a single card into the deck.
+        Adds a single card to the deck at a specified or random position.
+        By default, a random position is used.
 
-        :param card: Card to insert
-        :type card: Card
-        :param position: To insert card to a specific position of the deck
-                         (0 = top of the deck). By default, the position is
-                         random.
-        :type position: Optional[int]
-        :param seed: Seed for the random position (when position is random).
-        :type seed: Optional[int]
+        :param card: The card to add to the deck.
+        :param position: Position to insert the card (None for random).
+        :param seed: Seed for determining random position.
+
+        :Example:
+            >>> deck = Deck(initialise=False)
+            >>> deck.add_card(Card(Suit.HEARTS, Value.THREE), position=0)
+            >>> deck.cards_count
+            1
         """
 
         if seed:
@@ -198,12 +264,19 @@ class Deck:
     ) -> None:
 
         """
-        Inserts many cards into the deck at random position.
+        Adds multiple cards to the deck at random positions.
 
-        :param cards: List of card to insert.
-        :type cards: List[Card]
-        :param seed: Seed for the random positions (when position is random).
-        :type seed: Optional[int]
+        :param cards: A list of cards to add to the deck.
+        :param seed: Seed for determining random positions.
+
+        :Example:
+            >>> deck = Deck(initialise=False)
+            >>> deck.add_cards([
+            ...     Card(Suit.DIAMONDS, Value.NINE),
+            ...     Card(Suit.SPADES, Value.ACE)
+            ... ])
+            >>> deck.cards_count
+            2
         """
 
         for card in cards:
@@ -216,11 +289,3 @@ class Deck:
     def __eq__(self, other: Deck) -> bool:
 
         return self._deck == other._deck
-
-
-if __name__ == "__main__":
-    deck = Deck()
-
-    for card in deck:
-
-        print(card)
