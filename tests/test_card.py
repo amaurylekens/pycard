@@ -3,7 +3,7 @@
 
 import pytest
 
-from src.pycarddeck.card import Card, Suit, Value
+from pycarddeck.card import Card, Suit, Value
 
 # test value
 test_values = [
