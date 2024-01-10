@@ -6,7 +6,7 @@ from __future__ import annotations
 import random
 from typing import Optional, Generator, List, Iterator, Tuple
 
-from src.pycard.card import Card, Suit, Value
+from src.pydecklib.card import Card, Suit, Value
 
 
 class Deck:

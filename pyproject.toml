@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pycard"
+name = "pydecklib"
 version = "0.1.0"
 description = "A deck of cards"
 authors = ["amaurylekens"]

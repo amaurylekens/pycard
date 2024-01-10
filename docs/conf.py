@@ -6,7 +6,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"pycard"
+project = u"pydecklib"
 copyright = u"2024, amaurylekens"
 author = u"amaurylekens"
 

@@ -3,8 +3,8 @@
 
 import pytest
 
-from src.pycard.deck import Deck
-from src.pycard.card import Card, Suit, Value
+from src.pydecklib.deck import Deck
+from src.pydecklib.card import Card, Suit, Value
 
 # Set the seed
 SEED = 42
