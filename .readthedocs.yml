@@ -3,7 +3,9 @@ version: 2
 
 # Image to use
 build:
-  image: testing
+  os: ubuntu-20.04  # for consistency, matches the one used for CI
+  tools:
+    python: "3.9"
 
 # Configuration
 python:
