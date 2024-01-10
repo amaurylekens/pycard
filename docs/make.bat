@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=pycarddeck
+set SPHINXPROJ=pycard
 
 if "%1" == "" goto help
 

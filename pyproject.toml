@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pycarddeck"
+name = "pycard"
 version = "0.1.0"
 description = "A deck of cards"
 authors = ["amaurylekens"]
@@ -8,6 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+
 
 [tool.poetry.dev-dependencies]
 

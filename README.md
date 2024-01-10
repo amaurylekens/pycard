@@ -1,19 +1,19 @@
-# pycarddeck
+# pycard
 
 A deck of cards
 
 ## Installation
 
 ```bash
-$ pip install pycarddeck
+$ pip install pycard
 ```
 
 ## Usage
 
-`pycarddeck` can be used to use a deck of cards in a game context.
+`pycard` can be used to use a deck of cards in a game context.
 
 ```python
-from pycarddeck.deck import Deck
+from pycard.deck import Deck
 
 deck = Deck()
 deck.shuffle()
@@ -26,8 +26,8 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`pycarddeck` was created by amaurylekens. It is licensed under the terms of the MIT license.
+`pycard` was created by amaurylekens. It is licensed under the terms of the MIT license.
 
 ## Credits
 
-`pycarddeck` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+`pycard` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).

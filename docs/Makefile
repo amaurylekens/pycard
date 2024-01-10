@@ -3,7 +3,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = pycarddeck
+SPHINXPROJ    = pycard
 SOURCEDIR     = .
 BUILDDIR      = _build
 
